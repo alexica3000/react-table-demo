@@ -25,7 +25,10 @@ class App extends Component {
         })
 
         return (
-            <ul>{result}</ul>
+            <div>
+                <b>Api results:</b>
+                <ul>{result}</ul>
+            </div>
         )
     }
 }

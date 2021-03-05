@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Table from "./Table";
-import Form from "./Form";
-import Api from "./Api";
+import Table from "./components/Table";
+import Form from "./components/Form";
+import Api from "./components/Api";
+import Total from "./components/Total";
 
 class App extends Component {
     state = {
@@ -24,6 +25,10 @@ class App extends Component {
         });
     }
 
+    totalItems = () => {
+        return this.state.characters.length;
+    }
+
     render() {
         const {characters} = this.state;
 
@@ -33,10 +38,11 @@ class App extends Component {
                     characterData={characters}
                     removeCharacter={this.removeCharacter}
                 />
+                <Total totalItems={this.totalItems()}/>
+                <hr/>
                 <Form handleSubmit={this.handleSubmit} />
                 <hr/>
-                <div><b>Api results:</b></div>
-                <div><Api /></div>
+                <Api />
             </div>
         );
     }
