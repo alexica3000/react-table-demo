@@ -39,9 +39,7 @@ class App extends Component {
                     removeCharacter={this.removeCharacter}
                 />
                 <Total totalItems={this.totalItems()}/>
-                <hr/>
                 <Form handleSubmit={this.handleSubmit} />
-                <hr/>
                 <Api />
             </div>
         );

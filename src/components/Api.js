@@ -26,6 +26,7 @@ class App extends Component {
 
         return (
             <div>
+                <hr/>
                 <b>Api results:</b>
                 <ul>{result}</ul>
             </div>
