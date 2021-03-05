@@ -17,8 +17,16 @@ class Form extends Component {
     }
 
     submitForm = () => {
+        if (this.isEmptyData()) {
+            return;
+        }
+
         this.props.handleSubmit(this.state);
         this.setState((this.initialState));
+    }
+
+    isEmptyData = () => {
+        return this.state.name === '' || this.state.job === '';
     }
 
     render() {
@@ -48,6 +56,7 @@ class Form extends Component {
                     type="button"
                     value="Submit"
                     onClick={this.submitForm}
+                    className={this.isEmptyData() ? "disabled-btn" : ""}
                 />
             </form>
         );

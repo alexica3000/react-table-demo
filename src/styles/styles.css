@@ -1,0 +1,13 @@
+.input-form {
+    width: 30%;
+    background: #f2f2f2;
+}
+
+.disabled-btn,
+.disabled-btn:hover,
+.disabled-btn:active,
+.disabled-btn:focus {
+    cursor: default;
+    background: #b3d3fe;
+    border: 1px solid lightblue !important;
+}
