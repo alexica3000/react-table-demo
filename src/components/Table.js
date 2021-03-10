@@ -19,6 +19,7 @@ const TableBody = (props) => {
                 <td>{row.name}</td>
                 <td>{row.job}</td>
                 <td>
+                    <button onClick={() => props.editCharacter(index)}>Edit</button>
                     <button onClick={() => props.removeCharacter(index)}>Delete</button>
                 </td>
             </tr>
@@ -32,7 +33,7 @@ const TableBody = (props) => {
 
 class Table extends Component {
     render() {
-        const {characterData, removeCharacter} = this.props;
+        const {characterData, removeCharacter, editCharacter} = this.props;
 
         return (
             <table>
@@ -40,6 +41,7 @@ class Table extends Component {
                 <TableBody
                     characterData={characterData}
                     removeCharacter={removeCharacter}
+                    editCharacter={editCharacter}
                 />
             </table>
         )

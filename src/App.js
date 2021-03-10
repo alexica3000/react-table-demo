@@ -5,8 +5,15 @@ import Api from "./components/Api";
 import Total from "./components/Total";
 
 class App extends Component {
+    initialFormData = {
+        name: '',
+        job: '',
+        index: ''
+    };
+
     state = {
-        characters: []
+        characters: [],
+        formData: this.initialFormData
     };
 
     removeCharacter = (index) => {
@@ -19,10 +26,36 @@ class App extends Component {
         });
     }
 
-    handleSubmit = (character) => {
+    editCharacter = (index) => {
+        const character = this.state.characters[index];
+
         this.setState({
-            characters: [...this.state.characters, character]
+            formData: {
+                name: character.name,
+                job: character.job,
+                index: index
+            }
         });
+    }
+
+    getState = () => {
+        return this.state;
+    }
+
+    handleSubmit = (character) => {
+        if (character.index === '') {
+            this.setState({
+                characters: [...this.state.characters, character]
+            });
+        } else {
+            let characters = [...this.state.characters];
+            characters[character.index] = character;
+
+            this.setState({
+                characters: characters,
+                formData: this.initialFormData
+            });
+        }
     }
 
     totalItems = () => {
@@ -30,16 +63,20 @@ class App extends Component {
     }
 
     render() {
-        const {characters} = this.state;
+        const {characters, formData} = this.state;
 
         return (
             <div className="container">
                 <Table
                     characterData={characters}
                     removeCharacter={this.removeCharacter}
+                    editCharacter={this.editCharacter}
                 />
                 <Total totalItems={this.totalItems()}/>
-                <Form handleSubmit={this.handleSubmit} />
+                <Form
+                    handleSubmit={this.handleSubmit}
+                    formData={formData}
+                />
                 <Api />
             </div>
         );

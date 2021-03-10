@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 class Form extends Component {
     initialState = {
         name: '',
-        job: ''
+        job: '',
+        index: ''
     }
 
-    state = this.initialState;
+    state = this.props.formData;
 
     handleChange = (event) => {
         const {name, value} = event.target;
@@ -22,18 +23,34 @@ class Form extends Component {
         }
 
         this.props.handleSubmit(this.state);
-        this.setState((this.initialState));
+        this.setState(this.initialState);
     }
 
     isEmptyData = () => {
         return this.state.name === '' || this.state.job === '';
     }
 
+    reRender = () => {
+        this.forceUpdate();
+    };
+
+    componentDidUpdate(prevProps) {
+        const {name, job, index} = this.props.formData;
+
+        if(prevProps.formData.index !== this.props.formData.index) {
+            this.setState({
+                name: name,
+                job: job,
+                index: index
+            });
+        }
+    }
+
     render() {
-        const {name, job} = this.state;
+        const {name, job, index} = this.state;
 
         return (
-            <form>
+            <form key={index}>
                 <label htmlFor="name">Name</label>
                 <input
                     className="input-form"
